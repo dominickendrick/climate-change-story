@@ -1,4 +1,13 @@
 var Player = {
+
+
+  text: [
+    "Do you think climate change is happening?",
+    "Climate change caused largely by humans\n burning fossil fuels like coal, oil and gas - right?",
+    "Are things gonna start getting sticky?",
+    "Do you think that companies own the most fossil fuels?",
+    "Companies should be sustainable - right?",
+  ],
   
   player: '',
   snapLocation: { x: 0, y: 0},
@@ -13,28 +22,27 @@ var Player = {
     this.player.anchor.set(0.5);
     game.physics.isoArcade.enable(this.player);
     this.player.body.moves = false;
-    this.player.body.setSize(50,40,60,-10,0,0);
+    this.player.body.setSize(50,40,60,0,0,0);
     Player.setControls(game, this.player);
 
     return this.player;
   },
   
-  currentLocation: [2,12],
+  currentLocation: [2,14],
   
   moving: false,
 
   update: function(player){
-
-    game.camera.focusOnXY(player.x, player.y - Roads.size * 2)
+    game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
     this.snapToGrid(this.currentLocation);
   },
 
   inBoundsLeft: function (){
-    return this.currentLocation[1] >= 9
+    return this.currentLocation[1] >= 4
   },
 
   inBoundsRight: function (){
-    return this.currentLocation[1] <= 16
+    return this.currentLocation[1] <= 22
   },
   
   snapToGrid: function(currentLocation){
@@ -121,6 +129,29 @@ var Player = {
     ]);
 
     player.moving = false;
+
+    var openKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+    var closeKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    
+    openKey.onDown.add(function () {
+       var text = this.text[game.rnd.pick([0,1,2,3,4,5,6,7,8,9])];
+       console.log(text.width);
+       var style = {  fill: "#ffffff", align: "center" };
+
+       game.dialog = game.add.text(40, game.height - 100, text, style);
+        
+       Player.fontStyle(game.dialog)
+        
+        var graphics = game.add.graphics(0, 0);
+        graphics.lineStyle(2, 0x0000FF, 1);
+        graphics.beginFill(0xFFFF0B, 0.5);
+        graphics.drawRect(50, 250, 100, 100);
+        graphics.endFill();
+    }, this);
+
+    closeKey.onDown.add(function () {
+      game.dialog.destroy();
+    }, this);
     
     this.cursors.up.onDown.add(function () {
       this.moving = true;
@@ -177,7 +208,7 @@ var Player = {
   },
   showLabels: function(game) {
       var style = { font: "20px Arial", fill: "#fff", align: "center" };
-      //score text
+      
       var text = "Score :";
       game.scoreLabel = game.add.text(game.width-150, 10, text, style);
       Player.fontStyle(game.scoreLabel)

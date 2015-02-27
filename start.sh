@@ -1,2 +1,2 @@
 #!/bin/bash
-python -m SimpleHTTPServer 1337
+python -m SimpleHTTPServer 1338

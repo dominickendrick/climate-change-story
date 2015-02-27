@@ -31,7 +31,7 @@ BasicGame.Boot.prototype =
     preload: function () {
       
         game.load.image('bus', 'assets/bus1.png');
-        game.load.image('player', 'assets/chicken.png');
+        game.load.image('player', 'assets/player.png');
         
         game.time.advancedTiming = true;
         game.stage.disableVisibilityChange = true;
@@ -56,6 +56,7 @@ BasicGame.Boot.prototype =
         game.physics.isoArcade.useQuadTree = true;
         
         Roads.loadTiles();
+        Roads.parseMap();
         player = Player.init(game);
 
     },
@@ -68,7 +69,7 @@ BasicGame.Boot.prototype =
 
     },
     render: function () {
-        game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
+       // game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
         // carsGroup.forEach(function (tile) {
         //     game.debug.body(tile, 'rgba(189, 221, 235, 0.6)', false);
         // });
