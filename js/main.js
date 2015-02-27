@@ -56,7 +56,6 @@ BasicGame.Boot.prototype =
         game.physics.isoArcade.useQuadTree = true;
         
         Roads.loadTiles();
-        Roads.parseMap();
         player = Player.init(game);
 
     },
