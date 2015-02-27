@@ -138,7 +138,7 @@ var Player = {
        console.log(text.width);
        var style = {  fill: "#ffffff", align: "center" };
 
-       game.dialog = game.add.text(40, game.height - 100, text, style);
+       game.dialog = game.add.text(40, game.height - 200, text, style);
         
        Player.fontStyle(game.dialog)
         
@@ -210,11 +210,11 @@ var Player = {
       var style = { font: "20px Arial", fill: "#fff", align: "center" };
       
       var text = "Score :";
-      game.scoreLabel = game.add.text(game.width-150, 10, text, style);
+      game.scoreLabel = game.add.text(game.width-150, -100, text, style);
       Player.fontStyle(game.scoreLabel)
       
       var count = "0";
-      game.scoreCount = game.add.text(game.width-50, 10, count, style);
+      game.scoreCount = game.add.text(game.width-50, -100, count, style);
       Player.fontStyle(game.scoreCount)
   },
   fontStyle: function(item){
